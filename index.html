@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Objava cjenika - Kärcher</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; color: #333; }
+    h1 { color: #000; border-bottom: 3px solid #ffed00; padding-bottom: 10px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; margin-top: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
+    th { background-color: #f2f2f2; }
+    .btn { background-color: #ffed00; color: #000; padding: 6px 12px; text-decoration: none; font-weight: bold; border-radius: 4px; display: inline-block; }
+    .btn:hover { background-color: #e6d500; }
+  </style>
+</head>
+<body>
+
+  <h1>Objava cjenika proizvoda i usluga</h1>
+  <p>Sukladno Odluci o objavi cjenika (NN 101/2026), u nastavku se nalaze dnevni cjenici za sve prodajne lokacije i webshop u proteklih 30 dana.</p>
+
+  <div id="loading">Učitavanje cjenika...</div>
+
+  <table id="cjenici-table" style="display: none;">
+    <thead>
+      <tr>
+        <th>Datum</th>
+        <th>Lokacija / Objekt</th>
+        <th>Datoteka</th>
+        <th style="text-align: center;">Preuzimanje</th>
+      </tr>
+    </thead>
+    <tbody id="cjenici-list"></tbody>
+  </table>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // API pokliče vsebino trenutnega repozitorija
+      const repoUrl = window.location.pathname.split('/')[1]; 
+      const owner = window.location.hostname.split('.')[0];
+      const apiUrl = `https://api.github.com/repos/${owner}/${repoUrl}/contents/`;
+
+      fetch(apiUrl)
+        .then(res => res.json())
+        .then(files => {
+          const list = document.getElementById("cjenici-list");
+          const table = document.getElementById("cjenici-table");
+          const loading = document.getElementById("loading");
+
+          // Filtriramo samo CSV datoteke in jih sortiramo od najnovejše navzdol
+          const csvFiles = files
+            .filter(f => f.name.toLowerCase().endsWith('.csv'))
+            .sort((a, b) => b.name.localeCompare(a.name));
+
+          if (csvFiles.length === 0) {
+            loading.innerText = "Trenutačno nema dostupnih cjenika.";
+            return;
+          }
+
+          csvFiles.forEach(file => {
+            const fileName = file.name;
+            const downloadUrl = file.download_url;
+
+            // Izvleček datuma in lokacije iz imena datoteke
+            let datum = "N/A";
+            const dateMatch = fileName.match(/(\d{8})|(\d{2}\.\d{2}\.\d{4})/);
+            if (dateMatch) {
+              let d = dateMatch[0];
+              datum = d.length === 8 && !d.includes('.') ? `${d.substr(6,2)}.${d.substr(4,2)}.${d.substr(0,4)}.` : d;
+            }
+
+            const parts = fileName.split('_');
+            let lokacija = parts[0] || "Prodajno mjesto";
+            if (parts[1]) lokacija += " - " + parts[1];
+
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${datum}</td>
+              <td><strong>${lokacija}</strong></td>
+              <td><small>${fileName}</small></td>
+              <td style="text-align: center;">
+                <a href="${downloadUrl}" class="btn" download>Preuzmi CSV</a>
+              </td>
+            `;
+            list.appendChild(tr);
+          });
+
+          loading.style.display = "none";
+          table.style.display = "table";
+        })
+        .catch(err => {
+          document.getElementById("loading").innerText = "Pogreška pri učitavanju cjenika.";
+        });
+    });
+  </script>
+</body>
+</html>
