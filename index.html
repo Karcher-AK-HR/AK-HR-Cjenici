@@ -2,40 +2,231 @@
 <html lang="hr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2.0">
+  <meta name="theme-color" content="#ffffff">
   <title>Objava cjenika - Kärcher</title>
+  
   <style>
-    body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; color: #333; }
-    h1 { color: #000; border-bottom: 3px solid #ffed00; padding-bottom: 10px; }
-    table { width: 100%; border-collapse: collapse; background: #fff; margin-top: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
-    th { background-color: #f2f2f2; }
-    .btn { background-color: #ffed00; color: #000; padding: 6px 12px; text-decoration: none; font-weight: bold; border-radius: 4px; display: inline-block; }
-    .btn:hover { background-color: #e6d500; }
+    :root {
+      --k-yellow: #ffed00;
+      --k-black: #1A1A1A;
+      --k-gray-bg: #F4F4F4;
+      --k-border: #d8d8d8;
+      --k-text: #2e3644;
+      --k-muted: #656565;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--k-gray-bg);
+      color: var(--k-text);
+      line-height: 1.5;
+      font-size: 16px;
+    }
+    
+    /* HEADER KÄRCHER STYLE */
+    header {
+      background: #FFFFFF;
+      border-bottom: 5px solid var(--k-yellow);
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .header-container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    header img {
+      height: 40px; /* Prilagojeno Karcher logotipu */
+      display: block;
+    }
+    
+    /* MAIN CONTENT CONTAINER */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px 80px 20px;
+    }
+    
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--k-black);
+      margin-bottom: 10px;
+    }
+    
+    p.subtitle {
+      color: var(--k-muted);
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
+
+    #loading {
+      font-weight: 600;
+      color: var(--k-muted);
+      background: #FFFFFF;
+      padding: 20px;
+      border-radius: 4px;
+      border: 1px solid var(--k-border);
+    }
+
+    /* TABLE STYLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #FFFFFF;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid var(--k-border);
+    }
+    
+    th, td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--k-border);
+    }
+    
+    th {
+      background-color: #FAFAFA;
+      font-weight: 700;
+      color: var(--k-black);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    td {
+      font-size: 15px;
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* KÄRCHER BUTTONS */
+    .btn {
+      background-image: -webkit-linear-gradient(bottom, #ffed00, #fff466);
+      background-color: var(--k-yellow);
+      color: var(--k-black);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      padding: 13px 20px;
+      display: inline-block;
+      border: 1px solid #e3e3e3;
+      transition: all 0.2s ease;
+      text-align: center;
+      line-height: 1.2;
+      min-width: 140px;
+    }
+    
+    .btn:hover {
+      background-image: none;
+      background-color: #e6d500;
+      border-color: #d4c400;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1A1A1A;
+      color: #FFFFFF;
+      padding: 40px 20px;
+      font-size: 13px;
+    }
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-container p {
+      color: #999999;
+      margin-top: 10px;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+      tr {
+        border-bottom: 2px solid var(--k-gray-bg);
+      }
+      td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        min-height: 60px;
+      }
+      td:before {
+        position: absolute;
+        top: 16px;
+        left: 20px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--k-muted);
+      }
+      td:nth-of-type(1):before { content: "Datum"; }
+      td:nth-of-type(2):before { content: "Lokacija / Objekt"; }
+      td:nth-of-type(3):before { content: "Datoteka"; }
+      td:nth-of-type(4):before { content: "Preuzimanje"; }
+      td:nth-of-type(4) { text-align: left !important; }
+      
+      .btn {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <h1>Objava cjenika proizvoda i usluga</h1>
-  <p>Sukladno Odluci o objavi cjenika (NN 101/2026), u nastavku se nalaze dnevni cjenici za sve prodajne lokacije i webshop u proteklih 30 dana.</p>
+  <header>
+    <div class="header-container">
+      <!-- Originalni Karcher Logotip (klican direktno iz Karcher strani) -->
+      <a href="https://www.karcher.com/hr/"><img src="https://s1.kaercher-media.com/versions/2026.3.0/static/img/logos/kaercher_logo.svg" alt="Kärcher Logo"></a>
+    </div>
+  </header>
 
-  <div id="loading">Učitavanje cjenika...</div>
+  <main>
+    <h1>Objava cjenika proizvoda i usluga</h1>
+    <p class="subtitle">Sukladno Pravilniku o načinu objave cjenika proizvoda, u nastavku se nalaze važeći i arhivski cjenici za webshop u strojno čitljivom CSV/XML formatu.</p>
 
-  <table id="cjenici-table" style="display: none;">
-    <thead>
-      <tr>
-        <th>Datum</th>
-        <th>Lokacija / Objekt</th>
-        <th>Datoteka</th>
-        <th style="text-align: center;">Preuzimanje</th>
-      </tr>
-    </thead>
-    <tbody id="cjenici-list"></tbody>
-  </table>
+    <div id="loading">Učitavanje cjenika...</div>
+
+    <table id="cjenici-table" style="display: none;">
+      <thead>
+        <tr>
+          <th>Datum</th>
+          <th>Lokacija / Objekt</th>
+          <th>Datoteka</th>
+          <th style="text-align: center;">Preuzimanje</th>
+        </tr>
+      </thead>
+      <tfoot id="cjenici-list"></tfoot>
+    </table>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <strong>Kärcher Hrvatska</strong>
+      <p>© 2026 Alfred Kärcher GmbH</p>
+    </div>
+  </footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // API pokliče vsebino trenutnega repozitorija
       const repoUrl = window.location.pathname.split('/')[1]; 
       const owner = window.location.hostname.split('.')[0];
       const apiUrl = `https://api.github.com/repos/${owner}/${repoUrl}/contents/`;
@@ -47,7 +238,6 @@
           const table = document.getElementById("cjenici-table");
           const loading = document.getElementById("loading");
 
-          // Filtriramo samo CSV datoteke in jih sortiramo od najnovejše navzdol
           const csvFiles = files
             .filter(f => f.name.toLowerCase().endsWith('.csv'))
             .sort((a, b) => b.name.localeCompare(a.name));
@@ -59,9 +249,9 @@
 
           csvFiles.forEach(file => {
             const fileName = file.name;
-            const downloadUrl = file.download_url;
+            // Relativna povezava omogoca neposreden prenos z levim klikom brez odpiranja v zavihku
+            const downloadUrl = "./" + encodeURIComponent(file.name);
 
-            // Izvleček datuma in lokacije iz imena datoteke
             let datum = "N/A";
             const dateMatch = fileName.match(/(\d{8})|(\d{2}\.\d{2}\.\d{4})/);
             if (dateMatch) {
@@ -79,7 +269,7 @@
               <td><strong>${lokacija}</strong></td>
               <td><small>${fileName}</small></td>
               <td style="text-align: center;">
-                <a href="${downloadUrl}" class="btn" download>Preuzmi CSV</a>
+                <a href="${downloadUrl}" class="btn" download="${fileName}">Preuzmi CSV</a>
               </td>
             `;
             list.appendChild(tr);
@@ -89,7 +279,7 @@
           table.style.display = "table";
         })
         .catch(err => {
-          document.getElementById("loading").innerText = "Pogreška pri učitavanju cjenika.";
+          document.getElementById("loading").innerText = "Pogreška pri učitavanju cjenika. Možete ga pronaći izravno u repozitoriju.";
         });
     });
   </script>
