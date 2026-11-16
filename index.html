@@ -24,45 +24,43 @@
       color: var(--k-text);
       line-height: 1.5;
       font-size: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
     
     /* HEADER KÄRCHER STYLE */
     header {
       background: #FFFFFF;
       border-bottom: 5px solid var(--k-yellow);
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      padding: 16px 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
     .header-container {
       max-width: 1200px;
       width: 100%;
       margin: 0 auto;
     }
-    header img {
-      height: 40px; /* Prilagojeno Karcher logotipu */
-      display: block;
+    .logo-link {
+      display: inline-block;
+      text-decoration: none;
+      line-height: 0;
     }
     
     /* MAIN CONTENT CONTAINER */
     main {
       max-width: 1200px;
+      width: 100%;
       margin: 40px auto;
-      padding: 0 20px 80px 20px;
+      padding: 0 20px 60px 20px;
+      flex: 1;
     }
     
     h1 {
       font-size: 28px;
       font-weight: 700;
       color: var(--k-black);
-      margin-bottom: 10px;
-    }
-    
-    p.subtitle {
-      color: var(--k-muted);
-      font-size: 15px;
-      margin-bottom: 30px;
+      margin-bottom: 24px;
     }
 
     #loading {
@@ -134,7 +132,7 @@
     footer {
       background: #1A1A1A;
       color: #FFFFFF;
-      padding: 40px 20px;
+      padding: 36px 20px;
       font-size: 13px;
     }
     .footer-container {
@@ -143,7 +141,7 @@
     }
     .footer-container p {
       color: #999999;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     /* RESPONSIVE DESIGN */
@@ -194,14 +192,17 @@
 
   <header>
     <div class="header-container">
-      <!-- Originalni Karcher Logotip (klican direktno iz Karcher strani) -->
-      <a href="https://www.karcher.com/hr/"><img src="https://s1.kaercher-media.com/versions/2026.3.0/static/img/logos/kaercher_logo.svg" alt="Kärcher Logo"></a>
+      <a href="https://www.karcher.com/hr/" class="logo-link" aria-label="Kärcher Hrvatska">
+        <svg width="168" height="44" viewBox="0 0 210 55" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kärcher">
+          <text x="0" y="37" fill="#1A1A1A" font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="38" letter-spacing="1.5">KÄRCHER</text>
+          <rect x="0" y="44" width="204" height="9" fill="#FFED00"/>
+        </svg>
+      </a>
     </div>
   </header>
 
   <main>
     <h1>Objava cjenika proizvoda i usluga</h1>
-    <p class="subtitle">Sukladno Pravilniku o načinu objave cjenika proizvoda, u nastavku se nalaze važeći i arhivski cjenici za webshop u strojno čitljivom CSV/XML formatu.</p>
 
     <div id="loading">Učitavanje cjenika...</div>
 
@@ -214,7 +215,7 @@
           <th style="text-align: center;">Preuzimanje</th>
         </tr>
       </thead>
-      <tfoot id="cjenici-list"></tfoot>
+      <tbody id="cjenici-list"></tbody>
     </table>
   </main>
 
@@ -249,7 +250,6 @@
 
           csvFiles.forEach(file => {
             const fileName = file.name;
-            // Relativna povezava omogoca neposreden prenos z levim klikom brez odpiranja v zavihku
             const downloadUrl = "./" + encodeURIComponent(file.name);
 
             let datum = "N/A";
@@ -279,7 +279,7 @@
           table.style.display = "table";
         })
         .catch(err => {
-          document.getElementById("loading").innerText = "Pogreška pri učitavanju cjenika. Možete ga pronaći izravno u repozitoriju.";
+          document.getElementById("loading").innerText = "Pogreška pri učitavanju cjenika.";
         });
     });
   </script>
