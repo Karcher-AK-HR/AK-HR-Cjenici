@@ -29,7 +29,7 @@
       flex-direction: column;
     }
     
-    /* HEADER KÄRCHER STYLE */
+    /* HEADER & KÄRCHER LOGO */
     header {
       background: #FFFFFF;
       border-bottom: 5px solid var(--k-yellow);
@@ -42,9 +42,24 @@
       margin: 0 auto;
     }
     .logo-link {
-      display: inline-block;
+      display: inline-flex;
+      flex-direction: column;
       text-decoration: none;
-      line-height: 0;
+    }
+    .karcher-wordmark {
+      font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
+      font-weight: 900;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: 1px;
+      color: var(--k-black);
+    }
+    .karcher-bar {
+      display: block;
+      width: 100%;
+      height: 7px;
+      background-color: var(--k-yellow);
+      margin-top: 4px;
     }
     
     /* MAIN CONTENT CONTAINER */
@@ -193,10 +208,8 @@
   <header>
     <div class="header-container">
       <a href="https://www.karcher.com/hr/" class="logo-link" aria-label="Kärcher Hrvatska">
-        <svg width="168" height="44" viewBox="0 0 210 55" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kärcher">
-          <text x="0" y="37" fill="#1A1A1A" font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="38" letter-spacing="1.5">KÄRCHER</text>
-          <rect x="0" y="44" width="204" height="9" fill="#FFED00"/>
-        </svg>
+        <span class="karcher-wordmark">KÄRCHER</span>
+        <span class="karcher-bar"></span>
       </a>
     </div>
   </header>
