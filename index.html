@@ -29,7 +29,7 @@
       flex-direction: column;
     }
     
-    /* HEADER & KÄRCHER LOGO */
+    /* HEADER & ORIGINAL KÄRCHER LOGO */
     header {
       background: #FFFFFF;
       border-bottom: 5px solid var(--k-yellow);
@@ -42,24 +42,14 @@
       margin: 0 auto;
     }
     .logo-link {
-      display: inline-flex;
-      flex-direction: column;
+      display: inline-block;
       text-decoration: none;
+      line-height: 0;
     }
-    .karcher-wordmark {
-      font-family: "Arial Black", "Helvetica Neue", Arial, sans-serif;
-      font-weight: 900;
-      font-size: 32px;
-      line-height: 1;
-      letter-spacing: 1px;
-      color: var(--k-black);
-    }
-    .karcher-bar {
+    .karcher-logo {
+      height: 42px;
+      width: auto;
       display: block;
-      width: 100%;
-      height: 7px;
-      background-color: var(--k-yellow);
-      margin-top: 4px;
     }
     
     /* MAIN CONTENT CONTAINER */
@@ -208,8 +198,7 @@
   <header>
     <div class="header-container">
       <a href="https://www.karcher.com/hr/" class="logo-link" aria-label="Kärcher Hrvatska">
-        <span class="karcher-wordmark">KÄRCHER</span>
-        <span class="karcher-bar"></span>
+        <img src="./kaercher-com-brandmark.svg" alt="Kärcher" class="karcher-logo">
       </a>
     </div>
   </header>
