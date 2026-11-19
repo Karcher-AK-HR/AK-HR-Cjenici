@@ -37,7 +37,7 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
     .header-container {
-      max-width: 1760px;
+      max-width: 1680px;
       width: 100%;
       margin: 0 auto;
     }
@@ -54,7 +54,7 @@
 
     /* MAIN CONTENT CONTAINER */
     main {
-      max-width: 1760px;
+      max-width: 1680px;
       width: 100%;
       margin: 36px auto;
       padding: 0 24px 60px 24px;
@@ -179,7 +179,7 @@
       background: #F4F4F4;
     }
 
-    /* TWO-COLUMN DATA AREA: COMPACT LEFT DATE SIDEBAR + WIDE RIGHT TABLE */
+    /* TWO-COLUMN DATA AREA: COMPACT LEFT DATE SIDEBAR + RIGHT TABLE */
     .content-grid {
       display: grid;
       grid-template-columns: 155px 1fr;
@@ -283,6 +283,31 @@
       border: 1px solid var(--k-border);
     }
 
+    /* TOP DATE REFERENCE BAR ABOVE TABLE */
+    .table-date-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 18px;
+      background: #FFFFFF;
+      border-bottom: 2px solid var(--k-yellow);
+    }
+
+    .active-date-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--k-black);
+      letter-spacing: 0.2px;
+    }
+
+    .active-date-sub {
+      font-size: 13px;
+      color: var(--k-muted);
+      font-weight: 500;
+    }
+
     #loading,
     #empty-state {
       font-weight: 600;
@@ -301,7 +326,7 @@
     }
 
     th, td {
-      padding: 13px 12px;
+      padding: 14px 16px;
       text-align: left;
       border-bottom: 1px solid var(--k-border);
       vertical-align: middle;
@@ -318,7 +343,7 @@
     }
 
     td {
-      font-size: 14.5px;
+      font-size: 15px;
     }
 
     tr:hover td {
@@ -329,12 +354,6 @@
       border-bottom: none;
     }
 
-    .date-main {
-      font-weight: 700;
-      color: var(--k-black);
-      white-space: nowrap;
-    }
-
     .loc-title {
       font-weight: 700;
       color: var(--k-black);
@@ -343,7 +362,7 @@
     }
 
     .loc-addr {
-      font-size: 12.5px;
+      font-size: 13px;
       color: var(--k-muted);
       display: block;
       margin-top: 2px;
@@ -355,7 +374,7 @@
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      padding: 4px 8px;
+      padding: 4px 9px;
       letter-spacing: 0.5px;
       white-space: nowrap;
     }
@@ -374,7 +393,7 @@
 
     .file-name {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 12px;
+      font-size: 12.5px;
       color: var(--k-muted);
       white-space: nowrap;
     }
@@ -386,15 +405,15 @@
       color: var(--k-black);
       text-decoration: none;
       font-weight: 600;
-      font-size: 12.5px;
+      font-size: 13px;
       text-transform: uppercase;
-      padding: 11px 14px;
+      padding: 11px 16px;
       display: inline-block;
       border: 1px solid #e3e3e3;
       transition: all 0.2s ease;
       text-align: center;
       line-height: 1.2;
-      min-width: 125px;
+      min-width: 130px;
       white-space: nowrap;
     }
 
@@ -412,7 +431,7 @@
       font-size: 13px;
     }
     .footer-container {
-      max-width: 1760px;
+      max-width: 1680px;
       margin: 0 auto;
     }
     .footer-container p {
@@ -455,12 +474,11 @@
         text-transform: uppercase;
         color: var(--k-muted);
       }
-      td:nth-of-type(1):before { content: "Datum"; }
-      td:nth-of-type(2):before { content: "Lokacija / Objekt"; }
-      td:nth-of-type(3):before { content: "Vrsta"; }
-      td:nth-of-type(4):before { content: "Datoteka"; }
-      td:nth-of-type(5):before { content: "Preuzimanje"; }
-      td:nth-of-type(5) { text-align: left !important; }
+      td:nth-of-type(1):before { content: "Lokacija / Objekt"; }
+      td:nth-of-type(2):before { content: "Vrsta"; }
+      td:nth-of-type(3):before { content: "Datoteka"; }
+      td:nth-of-type(4):before { content: "Preuzimanje"; }
+      td:nth-of-type(4) { text-align: left !important; }
 
       .loc-title,
       .loc-addr,
@@ -539,10 +557,14 @@
           <div id="empty-state" style="display: none;">Nema objavljenih cjenika za odabrane filtre.</div>
 
           <div class="table-wrap" id="table-wrap">
+            <div class="table-date-bar">
+              <span class="active-date-title" id="table-active-date"></span>
+              <span class="active-date-sub" id="table-active-sub"></span>
+            </div>
+
             <table id="cjenici-table">
               <thead>
                 <tr>
-                  <th>Datum</th>
                   <th>Lokacija / Objekt</th>
                   <th>Vrsta</th>
                   <th>Datoteka</th>
@@ -581,6 +603,7 @@
       let activeChannel = "ALL";
       let selectedDate = "ALL";
       let latestDateIso = "";
+      const dateDisplayMap = new Map();
 
       function escapeHtml(str) {
         return String(str)
@@ -686,14 +709,13 @@
           });
 
         const dateContainer = document.getElementById("date-buttons");
-        const dateMap = new Map();
         rows.forEach(r => {
-          if (!dateMap.has(r.dateIso)) {
-            dateMap.set(r.dateIso, r.datum);
+          if (!dateDisplayMap.has(r.dateIso)) {
+            dateDisplayMap.set(r.dateIso, r.datum);
           }
         });
 
-        const sortedDates = Array.from(dateMap.entries()).sort((a, b) => b[0].localeCompare(a[0]));
+        const sortedDates = Array.from(dateDisplayMap.entries()).sort((a, b) => b[0].localeCompare(a[0]));
         latestDateIso = sortedDates.length > 0 ? sortedDates[0][0] : "ALL";
         selectedDate = latestDateIso;
 
@@ -731,6 +753,8 @@
         const tableWrap = document.getElementById("table-wrap");
         const emptyState = document.getElementById("empty-state");
         const countEl = document.getElementById("filter-count");
+        const activeDateHeading = document.getElementById("table-active-date");
+        const activeDateSub = document.getElementById("table-active-sub");
 
         const locVal = document.getElementById("filter-location").value;
         const typeVal = document.getElementById("filter-type").value;
@@ -752,10 +776,13 @@
           return true;
         });
 
-        const dateLabel = selectedDate === "ALL"
-          ? "svi datumi"
-          : (filtered[0] ? filtered[0].datum : selectedDate);
-        countEl.textContent = `Prikazano ${filtered.length} cjenika (${dateLabel})`;
+        const currentDateDisplay = selectedDate === "ALL"
+          ? "Svi datumi (zadnjih 15 dana)"
+          : (dateDisplayMap.get(selectedDate) || selectedDate);
+
+        activeDateHeading.textContent = currentDateDisplay;
+        activeDateSub.textContent = `${filtered.length} ${filtered.length === 1 ? "datoteka" : "datoteka"}`;
+        countEl.textContent = `Prikazano ${filtered.length} cjenika`;
         list.innerHTML = "";
 
         if (filtered.length === 0) {
@@ -770,15 +797,15 @@
         filtered.forEach(item => {
           const badgeClass = item.vrsta === "ROBA" ? "badge-roba" : "badge-usluga";
           const badgeLabel = item.vrsta === "ROBA" ? "Roba" : "Usluge";
+          const subLine = selectedDate === "ALL"
+            ? `${escapeHtml(item.locAddr)} • <strong>${item.datum}</strong>`
+            : escapeHtml(item.locAddr);
 
           const tr = document.createElement("tr");
           tr.innerHTML = `
             <td>
-              <span class="date-main">${item.datum}</span>
-            </td>
-            <td>
               <span class="loc-title">${escapeHtml(item.locTitle)}</span>
-              <span class="loc-addr">${escapeHtml(item.locAddr)}</span>
+              <span class="loc-addr">${subLine}</span>
             </td>
             <td>
               <span class="badge ${badgeClass}">${badgeLabel}</span>
