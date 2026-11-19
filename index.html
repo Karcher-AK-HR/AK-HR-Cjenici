@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2.0">
   <meta name="theme-color" content="#ffffff">
   <title>Objava cjenika - Kärcher</title>
-  
+
   <style>
     :root {
       --k-yellow: #ffed00;
@@ -15,9 +15,9 @@
       --k-text: #2e3644;
       --k-muted: #656565;
     }
-    
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background: var(--k-gray-bg);
@@ -28,7 +28,7 @@
       display: flex;
       flex-direction: column;
     }
-    
+
     /* HEADER & ORIGINAL KÄRCHER LOGO */
     header {
       background: #FFFFFF;
@@ -51,7 +51,7 @@
       width: auto;
       display: block;
     }
-    
+
     /* MAIN CONTENT CONTAINER */
     main {
       max-width: 1200px;
@@ -60,21 +60,139 @@
       padding: 0 20px 60px 20px;
       flex: 1;
     }
-    
+
     h1 {
       font-size: 28px;
       font-weight: 700;
       color: var(--k-black);
+      margin-bottom: 20px;
+    }
+
+    /* FILTER BAR */
+    .filter-box {
+      background: #FFFFFF;
+      border: 1px solid var(--k-border);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 20px;
       margin-bottom: 24px;
     }
 
-    #loading {
+    .channel-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .tab-btn {
+      background: #F4F4F4;
+      color: var(--k-black);
+      border: 1px solid var(--k-border);
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      background: #e9e9e9;
+    }
+
+    .tab-btn.active {
+      background: var(--k-black);
+      color: var(--k-yellow);
+      border-color: var(--k-black);
+    }
+
+    .filter-controls {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 0.9fr 1.2fr;
+      gap: 14px;
+      align-items: end;
+    }
+
+    @media (max-width: 960px) {
+      .filter-controls {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .filter-controls {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .filter-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: var(--k-muted);
+      margin-bottom: 6px;
+    }
+
+    .filter-group select,
+    .filter-group input {
+      width: 100%;
+      height: 40px;
+      padding: 0 12px;
+      font-size: 14px;
+      color: var(--k-black);
+      background: #FFFFFF;
+      border: 1px solid var(--k-border);
+      border-radius: 0;
+    }
+
+    .filter-group select:focus,
+    .filter-group input:focus {
+      outline: none;
+      border-color: var(--k-black);
+      box-shadow: inset 0 0 0 1px var(--k-black);
+    }
+
+    .filter-status-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid #eeeeee;
+      font-size: 13px;
+      color: var(--k-muted);
+    }
+
+    .reset-link {
+      background: none;
+      border: 1px solid var(--k-border);
+      color: var(--k-black);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      cursor: pointer;
+    }
+
+    .reset-link:hover {
+      background: #F4F4F4;
+    }
+
+    #loading,
+    #empty-state {
       font-weight: 600;
       color: var(--k-muted);
       background: #FFFFFF;
-      padding: 20px;
-      border-radius: 4px;
+      padding: 24px;
       border: 1px solid var(--k-border);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
     /* TABLE STYLE */
@@ -85,13 +203,14 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       border: 1px solid var(--k-border);
     }
-    
+
     th, td {
       padding: 16px 20px;
       text-align: left;
       border-bottom: 1px solid var(--k-border);
+      vertical-align: middle;
     }
-    
+
     th {
       background-color: #FAFAFA;
       font-weight: 700;
@@ -100,13 +219,73 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    
+
     td {
       font-size: 15px;
     }
-    
+
+    tr:hover td {
+      background-color: #fcfcfc;
+    }
+
     tr:last-child td {
       border-bottom: none;
+    }
+
+    .date-main {
+      font-weight: 700;
+      color: var(--k-black);
+      display: block;
+      white-space: nowrap;
+    }
+
+    .date-time {
+      font-size: 12px;
+      color: var(--k-muted);
+      display: block;
+    }
+
+    .loc-title {
+      font-weight: 700;
+      color: var(--k-black);
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .loc-addr {
+      font-size: 13px;
+      color: var(--k-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      letter-spacing: 0.4px;
+      vertical-align: middle;
+    }
+
+    .badge-roba {
+      background: #eef3fa;
+      color: #1a4d8f;
+      border: 1px solid #c9daf2;
+    }
+
+    .badge-usluga {
+      background: #eaf6ee;
+      color: #166534;
+      border: 1px solid #bfe3cb;
+    }
+
+    .file-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      color: var(--k-muted);
+      word-break: break-all;
     }
 
     /* KÄRCHER BUTTONS */
@@ -125,8 +304,9 @@
       text-align: center;
       line-height: 1.2;
       min-width: 140px;
+      white-space: nowrap;
     }
-    
+
     .btn:hover {
       background-image: none;
       background-color: #e6d500;
@@ -185,7 +365,7 @@
       td:nth-of-type(3):before { content: "Datoteka"; }
       td:nth-of-type(4):before { content: "Preuzimanje"; }
       td:nth-of-type(4) { text-align: left !important; }
-      
+
       .btn {
         width: 100%;
         margin-top: 10px;
@@ -206,7 +386,53 @@
   <main>
     <h1>Objava cjenika proizvoda i usluga</h1>
 
+    <div class="filter-box" id="filter-panel" style="display: none;">
+      <div class="channel-tabs" role="group" aria-label="Odabir prodajnog kanala">
+        <button type="button" class="tab-btn active" data-channel="ALL">Svi kanali</button>
+        <button type="button" class="tab-btn" data-channel="KC">Kärcher Centri</button>
+        <button type="button" class="tab-btn" data-channel="SERVIS">Servisi</button>
+        <button type="button" class="tab-btn" data-channel="WEBSHOP">Webshop</button>
+      </div>
+
+      <div class="filter-controls">
+        <div class="filter-group">
+          <label for="filter-location">Lokacija</label>
+          <select id="filter-location">
+            <option value="ALL">Sve lokacije</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-date">Datum objave</label>
+          <select id="filter-date">
+            <option value="ALL">Svi datumi (zadnjih 15 dana)</option>
+            <option value="LATEST">Samo najnovija objava</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-type">Vrsta cjenika</label>
+          <select id="filter-type">
+            <option value="ALL">Roba i usluge</option>
+            <option value="ROBA">Samo roba (proizvodi)</option>
+            <option value="USLUGA">Samo usluge (servis)</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-search">Brza pretraga</label>
+          <input type="search" id="filter-search" placeholder="Lokacija, adresa ili naziv datoteke...">
+        </div>
+      </div>
+
+      <div class="filter-status-row">
+        <span id="filter-count">Učitavanje...</span>
+        <button type="button" class="reset-link" id="btn-reset">Poništi filtre</button>
+      </div>
+    </div>
+
     <div id="loading">Učitavanje cjenika...</div>
+    <div id="empty-state" style="display: none;">Nema objavljenih cjenika za odabrane filtre.</div>
 
     <table id="cjenici-table" style="display: none;">
       <thead>
@@ -230,57 +456,254 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const repoUrl = window.location.pathname.split('/')[1]; 
-      const owner = window.location.hostname.split('.')[0];
-      const apiUrl = `https://api.github.com/repos/${owner}/${repoUrl}/contents/`;
+      const LOCATION_INFO = {
+        "Webshop":      { title: "Internet trgovina (Webshop)", address: "Samoborska cesta 169A, 10090 Zagreb", order: 1 },
+        "KC_Zagreb":    { title: "Kärcher Centar Zagreb",       address: "Samoborska cesta 169A, 10090 Zagreb", order: 2 },
+        "KC_Varazdin":  { title: "Kärcher Centar Varaždin",     address: "Jalkovečka ulica 76, 42000 Varaždin", order: 3 },
+        "KC_Rijeka":    { title: "Kärcher Centar Rijeka",       address: "Vozišće 5, 51216 Viškovo",            order: 4 },
+        "Servis_Zadar": { title: "Kärcher Servis Zadar",        address: "Zagrebačka ulica 47, 23000 Zadar",    order: 5 },
+        "KC_Sibenik":   { title: "Kärcher Centar Šibenik",      address: "Ivana Meštrovića 27, 22000 Šibenik",  order: 6 },
+        "KC_Split":     { title: "Kärcher Centar Split",        address: "Lovački put 1, 21000 Split",          order: 7 },
+        "KC_Dubrovnik": { title: "Kärcher Centar Dubrovnik",    address: "Obala Stjepana Radića 25, 20000 Dubrovnik", order: 8 }
+      };
 
-      fetch(apiUrl)
-        .then(res => res.json())
-        .then(files => {
-          const list = document.getElementById("cjenici-list");
-          const table = document.getElementById("cjenici-table");
+      let allRows = [];
+      let activeChannel = "ALL";
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function parseCsvItem(fileName) {
+        const match = fileName.match(/^(\d{11})_(.+)_(ROBA|USLUGA)_(\d{3})_(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})\.csv$/i);
+        if (!match) return null;
+
+        const [, oib, middlePart, vrstaRaw, spremiste, yyyy, mm, dd, hh, min] = match;
+        const vrsta = vrstaRaw.toUpperCase();
+        const datum = `${dd}.${mm}.${yyyy}.`;
+        const vrijeme = `${hh}:${min}`;
+        const dateIso = `${yyyy}-${mm}-${dd}`;
+        const sortStamp = `${yyyy}${mm}${dd}_${hh}${min}`;
+
+        let rest = middlePart;
+        if (middlePart.startsWith("Internet_trgovina_")) rest = middlePart.slice("Internet_trgovina_".length);
+        else if (middlePart.startsWith("Prodavaonica_")) rest = middlePart.slice("Prodavaonica_".length);
+        else if (middlePart.startsWith("Servis_")) rest = middlePart.slice("Servis_".length);
+
+        let oznaka = rest;
+        let rawAddr = "";
+        const oznMatch = rest.match(/^(.*)_(Webshop|KC_[A-Za-z0-9-]+|Servis_[A-Za-z0-9-]+)$/);
+        if (oznMatch) {
+          rawAddr = oznMatch[1];
+          oznaka = oznMatch[2];
+        }
+
+        const meta = LOCATION_INFO[oznaka];
+        const locTitle = meta ? meta.title : oznaka.replace(/_/g, " ");
+        const locAddr = meta ? meta.address : rawAddr.replace(/_/g, " ");
+        const locOrder = meta ? meta.order : 99;
+
+        const isWebshop = oznaka === "Webshop" || middlePart.startsWith("Internet_trgovina_");
+        const isStandaloneServis = oznaka.startsWith("Servis_") || middlePart.startsWith("Servis_");
+        const isKc = oznaka.startsWith("KC_");
+
+        return {
+          fileName,
+          downloadUrl: "./" + encodeURIComponent(fileName),
+          datum,
+          vrijeme,
+          dateIso,
+          sortStamp,
+          vrsta,
+          oznaka,
+          locTitle,
+          locAddr,
+          locOrder,
+          isWebshop,
+          isKc,
+          isServis: isStandaloneServis || vrsta === "USLUGA"
+        };
+      }
+
+      async function loadFileNames() {
+        // 1. Primarno: manifest cjenici.json (bez API rate-limita)
+        try {
+          const manifestRes = await fetch(`./cjenici.json?t=${Date.now()}`, { cache: "no-store" });
+          if (manifestRes.ok) {
+            const manifest = await manifestRes.json();
+            if (manifest && Array.isArray(manifest.files)) {
+              return manifest.files.map(f => f.fileName || f.path.split("/").pop());
+            }
+          }
+        } catch (e) {}
+
+        // 2. Fallback: GitHub Contents API
+        const pathRepo = window.location.pathname.split("/")[1] || "AK-HR-Cjenici";
+        const hostOwner = window.location.hostname.endsWith("github.io")
+          ? window.location.hostname.split(".")[0]
+          : "Karcher-AK-HR";
+        const apiUrl = `https://api.github.com/repos/${hostOwner}/${pathRepo}/contents/`;
+        const ghRes = await fetch(apiUrl);
+        if (!ghRes.ok) throw new Error("GitHub API greška");
+        const files = await ghRes.json();
+        return files.map(f => f.name);
+      }
+
+      function populateDropdowns(rows) {
+        const locSelect = document.getElementById("filter-location");
+        const dateSelect = document.getElementById("filter-date");
+
+        // Jedinstvene lokacije
+        const locMap = new Map();
+        rows.forEach(r => {
+          if (!locMap.has(r.oznaka)) {
+            locMap.set(r.oznaka, { title: r.locTitle, order: r.locOrder });
+          }
+        });
+        Array.from(locMap.entries())
+          .sort((a, b) => a[1].order - b[1].order || a[1].title.localeCompare(b[1].title))
+          .forEach(([oznaka, info]) => {
+            const opt = document.createElement("option");
+            opt.value = oznaka;
+            opt.textContent = info.title;
+            locSelect.appendChild(opt);
+          });
+
+        // Jedinstveni datumi
+        const dateMap = new Map();
+        rows.forEach(r => {
+          if (!dateMap.has(r.dateIso)) dateMap.set(r.dateIso, r.datum);
+        });
+        const sortedDates = Array.from(dateMap.entries()).sort((a, b) => b[0].localeCompare(a[0]));
+        if (sortedDates.length > 0) {
+          dateSelect.options[1].textContent = `Samo najnovija objava (${sortedDates[0][1]})`;
+        }
+        sortedDates.forEach(([iso, display]) => {
+          const opt = document.createElement("option");
+          opt.value = iso;
+          opt.textContent = display;
+          dateSelect.appendChild(opt);
+        });
+      }
+
+      function renderTable() {
+        const list = document.getElementById("cjenici-list");
+        const table = document.getElementById("cjenici-table");
+        const emptyState = document.getElementById("empty-state");
+        const countEl = document.getElementById("filter-count");
+
+        const locVal = document.getElementById("filter-location").value;
+        const dateVal = document.getElementById("filter-date").value;
+        const typeVal = document.getElementById("filter-type").value;
+        const searchVal = document.getElementById("filter-search").value.trim().toLowerCase();
+
+        const latestDateIso = allRows.length > 0 ? allRows[0].dateIso : "";
+
+        const filtered = allRows.filter(r => {
+          if (activeChannel === "KC" && !r.isKc) return false;
+          if (activeChannel === "SERVIS" && !r.isServis) return false;
+          if (activeChannel === "WEBSHOP" && !r.isWebshop) return false;
+
+          if (locVal !== "ALL" && r.oznaka !== locVal) return false;
+          if (dateVal === "LATEST" && r.dateIso !== latestDateIso) return false;
+          if (dateVal !== "ALL" && dateVal !== "LATEST" && r.dateIso !== dateVal) return false;
+          if (typeVal !== "ALL" && r.vrsta !== typeVal) return false;
+
+          if (searchVal) {
+            const hay = `${r.locTitle} ${r.locAddr} ${r.datum} ${r.vrsta} ${r.fileName}`.toLowerCase();
+            if (!hay.includes(searchVal)) return false;
+          }
+          return true;
+        });
+
+        countEl.textContent = `Prikazano ${filtered.length} od ${allRows.length} cjenika`;
+        list.innerHTML = "";
+
+        if (filtered.length === 0) {
+          table.style.display = "none";
+          emptyState.style.display = "block";
+          return;
+        }
+
+        emptyState.style.display = "none";
+        table.style.display = "table";
+
+        filtered.forEach(item => {
+          const badgeClass = item.vrsta === "ROBA" ? "badge-roba" : "badge-usluga";
+          const badgeLabel = item.vrsta === "ROBA" ? "Roba" : "Usluge";
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>
+              <span class="date-main">${item.datum}</span>
+              <span class="date-time">${item.vrijeme} h</span>
+            </td>
+            <td>
+              <span class="loc-title">${escapeHtml(item.locTitle)}</span>
+              <span class="badge ${badgeClass}">${badgeLabel}</span>
+              <span class="loc-addr">${escapeHtml(item.locAddr)}</span>
+            </td>
+            <td><span class="file-name">${escapeHtml(item.fileName)}</span></td>
+            <td style="text-align: center;">
+              <a href="${item.downloadUrl}" class="btn" download="${escapeHtml(item.fileName)}">Preuzmi CSV</a>
+            </td>
+          `;
+          list.appendChild(tr);
+        });
+      }
+
+      // Event listeneri za filtre
+      document.querySelectorAll(".tab-btn").forEach(btn => {
+        btn.addEventListener("click", function () {
+          document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+          this.classList.add("active");
+          activeChannel = this.dataset.channel;
+          renderTable();
+        });
+      });
+
+      document.getElementById("filter-location").addEventListener("change", renderTable);
+      document.getElementById("filter-date").addEventListener("change", renderTable);
+      document.getElementById("filter-type").addEventListener("change", renderTable);
+      document.getElementById("filter-search").addEventListener("input", renderTable);
+
+      document.getElementById("btn-reset").addEventListener("click", function () {
+        activeChannel = "ALL";
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.channel === "ALL"));
+        document.getElementById("filter-location").value = "ALL";
+        document.getElementById("filter-date").value = "ALL";
+        document.getElementById("filter-type").value = "ALL";
+        document.getElementById("filter-search").value = "";
+        renderTable();
+      });
+
+      // Inicijalno učitavanje
+      loadFileNames()
+        .then(names => {
           const loading = document.getElementById("loading");
+          allRows = names
+            .filter(n => n.toLowerCase().endsWith(".csv"))
+            .map(parseCsvItem)
+            .filter(Boolean)
+            .sort((a, b) => b.sortStamp.localeCompare(a.sortStamp) || a.locOrder - b.locOrder || a.vrsta.localeCompare(b.vrsta));
 
-          const csvFiles = files
-            .filter(f => f.name.toLowerCase().endsWith('.csv'))
-            .sort((a, b) => b.name.localeCompare(a.name));
+          loading.style.display = "none";
 
-          if (csvFiles.length === 0) {
-            loading.innerText = "Trenutačno nema dostupnih cjenika.";
+          if (allRows.length === 0) {
+            document.getElementById("empty-state").innerText = "Trenutačno nema dostupnih cjenika.";
+            document.getElementById("empty-state").style.display = "block";
             return;
           }
 
-          csvFiles.forEach(file => {
-            const fileName = file.name;
-            const downloadUrl = "./" + encodeURIComponent(file.name);
-
-            let datum = "N/A";
-            const dateMatch = fileName.match(/(\d{8})|(\d{2}\.\d{2}\.\d{4})/);
-            if (dateMatch) {
-              let d = dateMatch[0];
-              datum = d.length === 8 && !d.includes('.') ? `${d.substr(6,2)}.${d.substr(4,2)}.${d.substr(0,4)}.` : d;
-            }
-
-            const parts = fileName.split('_');
-            let lokacija = parts[0] || "Prodajno mjesto";
-            if (parts[1]) lokacija += " - " + parts[1];
-
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-              <td>${datum}</td>
-              <td><strong>${lokacija}</strong></td>
-              <td><small>${fileName}</small></td>
-              <td style="text-align: center;">
-                <a href="${downloadUrl}" class="btn" download="${fileName}">Preuzmi CSV</a>
-              </td>
-            `;
-            list.appendChild(tr);
-          });
-
-          loading.style.display = "none";
-          table.style.display = "table";
+          document.getElementById("filter-panel").style.display = "block";
+          populateDropdowns(allRows);
+          renderTable();
         })
-        .catch(err => {
+        .catch(() => {
           document.getElementById("loading").innerText = "Pogreška pri učitavanju cjenika.";
         });
     });
