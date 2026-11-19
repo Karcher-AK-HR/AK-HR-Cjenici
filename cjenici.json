@@ -1,0 +1,71 @@
+{
+  "updatedAt": "2026-11-19T15:34:28+01:00",
+  "retentionDays": 15,
+  "files": [
+    {
+      "fileName": "03109396077_Servis_Zagrebacka_ulica_47_23000_Zadar_Servis_Zadar_USLUGA_001_20261119_1534.csv",
+      "path": "03109396077_Servis_Zagrebacka_ulica_47_23000_Zadar_Servis_Zadar_USLUGA_001_20261119_1534.csv",
+      "size": 2910
+    },
+    {
+      "fileName": "03109396077_Prodavaonica_Vozisce_5_51216_Viskovo_KC_Rijeka_ROBA_001_20261119_1534.csv",
+      "path": "03109396077_Prodavaonica_Vozisce_5_51216_Viskovo_KC_Rijeka_ROBA_001_20261119_1534.csv",
+      "size": 6453318
+    },
+    {
+      "fileName": "03109396077_Prodavaonica_Samoborska_cesta_169A_10090_Zagreb_KC_Zagreb_USLUGA_001_20261119_1534.csv",
+      "path": "03109396077_Prodavaonica_Samoborska_cesta_169A_10090_Zagreb_KC_Zagreb_USLUGA_001_20261119_1534.csv",
+      "size": 2910
+    },
+    {
+      "fileName": "03109396077_Prodavaonica_Samoborska_cesta_169A_10090_Zagreb_KC_Zagreb_ROBA_001_20261119_1534.csv",
+      "path": "03109396077_Prodavaonica_Samoborska_cesta_169A_10090_Zagreb_KC_Zagreb_ROBA_001_20261119_1534.csv",
+      "size": 6453318
+    },
+    {
+      "fileName": "03109396077_Prodavaonica_Obala_Stjepana_Radica_25_20000_Dubrovnik_KC_Dubrovnik_USLUGA_001_20261119_1534.csv",
+      "path": "03109396077_Prodavaonica_Obala_Stjepana_Radica_25_20000_Dubrovnik_KC_Dubrovnik_USLUGA_001_20261119_1534.csv",
+      "size": 2910
+    },
+    {
+      "fileName": "03109396077_Prodavaonica_Obala_Stjepana_Radica_25_20000_Dubrovnik_KC_Dubrovnik_ROBA_001_20261119_1534.csv",
+      "path": "03109396077_Prodavaonica_Obala_Stjepana_Radica_25_20000_Dubrovnik_KC_Dubrovnik_ROBA_001_20261119_1534.csv",
+      "size": 6453318
+    },
+    {
+      "fileName": "03109396077_Prodavaonica_Lovacki_put_1_21000_Split_KC_Split_USLUGA_001_20261119_1534.csv",
+      "path": "03109396077_Prodavaonica_Lovacki_put_1_21000_Split_KC_Split_USLUGA_001_20261119_1534.csv",
+      "size": 2910
+    },
+    {
+      "fileName": "03109396077_Prodavaonica_Lovacki_put_1_21000_Split_KC_Split_ROBA_001_20261119_1534.csv",
+      "path": "03109396077_Prodavaonica_Lovacki_put_1_21000_Split_KC_Split_ROBA_001_20261119_1534.csv",
+      "size": 6453318
+    },
+    {
+      "fileName": "03109396077_Prodavaonica_Jalkovecka_ulica_76_42000_Varazdin_KC_Varazdin_USLUGA_001_20261119_1534.csv",
+      "path": "03109396077_Prodavaonica_Jalkovecka_ulica_76_42000_Varazdin_KC_Varazdin_USLUGA_001_20261119_1534.csv",
+      "size": 2910
+    },
+    {
+      "fileName": "03109396077_Prodavaonica_Jalkovecka_ulica_76_42000_Varazdin_KC_Varazdin_ROBA_001_20261119_1534.csv",
+      "path": "03109396077_Prodavaonica_Jalkovecka_ulica_76_42000_Varazdin_KC_Varazdin_ROBA_001_20261119_1534.csv",
+      "size": 6453318
+    },
+    {
+      "fileName": "03109396077_Prodavaonica_Ivana_Mestrovica_27_22000_Sibenik_KC_Sibenik_USLUGA_001_20261119_1534.csv",
+      "path": "03109396077_Prodavaonica_Ivana_Mestrovica_27_22000_Sibenik_KC_Sibenik_USLUGA_001_20261119_1534.csv",
+      "size": 2910
+    },
+    {
+      "fileName": "03109396077_Prodavaonica_Ivana_Mestrovica_27_22000_Sibenik_KC_Sibenik_ROBA_001_20261119_1534.csv",
+      "path": "03109396077_Prodavaonica_Ivana_Mestrovica_27_22000_Sibenik_KC_Sibenik_ROBA_001_20261119_1534.csv",
+      "size": 6453318
+    },
+    {
+      "fileName": "03109396077_Internet_trgovina_Samoborska_cesta_169A_10090_Zagreb_Webshop_ROBA_001_20261119_1534.csv",
+      "path": "03109396077_Internet_trgovina_Samoborska_cesta_169A_10090_Zagreb_Webshop_ROBA_001_20261119_1534.csv",
+      "size": 174874
+    }
+  ]
+}
