@@ -37,7 +37,7 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
     .header-container {
-      max-width: 1200px;
+      max-width: 1320px;
       width: 100%;
       margin: 0 auto;
     }
@@ -54,9 +54,9 @@
 
     /* MAIN CONTENT CONTAINER */
     main {
-      max-width: 1200px;
+      max-width: 1320px;
       width: 100%;
-      margin: 40px auto;
+      margin: 36px auto;
       padding: 0 20px 60px 20px;
       flex: 1;
     }
@@ -65,24 +65,142 @@
       font-size: 28px;
       font-weight: 700;
       color: var(--k-black);
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
-    /* FILTER BAR */
+    /* TWO-COLUMN LAYOUT (LEFT DATE SIDEBAR + RIGHT CONTENT) */
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .layout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* LEFT DATE SIDEBAR */
+    .date-sidebar {
+      background: #FFFFFF;
+      border: 1px solid var(--k-border);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 16px;
+    }
+
+    .sidebar-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--k-muted);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .date-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    @media (max-width: 960px) {
+      .date-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+
+    .date-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #FAFAFA;
+      color: var(--k-black);
+      border: 1px solid var(--k-border);
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    @media (max-width: 960px) {
+      .date-btn {
+        width: auto;
+      }
+    }
+
+    .date-btn:hover {
+      background: #f0f0f0;
+      border-color: #bcbcbc;
+    }
+
+    .date-btn.active {
+      background: var(--k-black);
+      color: #FFFFFF;
+      border-color: var(--k-black);
+      border-left: 4px solid var(--k-yellow);
+    }
+
+    .date-btn-badge {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      background: var(--k-yellow);
+      color: var(--k-black);
+      letter-spacing: 0.3px;
+    }
+
+    .date-btn-count {
+      font-size: 12px;
+      color: var(--k-muted);
+      font-weight: 500;
+    }
+
+    .date-btn.active .date-btn-count {
+      color: #cccccc;
+    }
+
+    .date-btn-all {
+      margin-top: 6px;
+      background: #FFFFFF;
+      font-size: 13px;
+      color: var(--k-muted);
+    }
+
+    @media (max-width: 960px) {
+      .date-btn-all {
+        margin-top: 0;
+      }
+    }
+
+    /* RIGHT CONTENT & TOP FILTER BAR */
+    .content-col {
+      min-width: 0;
+    }
+
     .filter-box {
       background: #FFFFFF;
       border: 1px solid var(--k-border);
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      padding: 20px;
-      margin-bottom: 24px;
+      padding: 18px 20px;
+      margin-bottom: 20px;
     }
 
     .channel-tabs {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      padding-bottom: 16px;
-      margin-bottom: 16px;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
       border-bottom: 1px solid #eeeeee;
     }
 
@@ -90,7 +208,7 @@
       background: #F4F4F4;
       color: var(--k-black);
       border: 1px solid var(--k-border);
-      padding: 9px 16px;
+      padding: 8px 15px;
       font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
@@ -111,18 +229,12 @@
 
     .filter-controls {
       display: grid;
-      grid-template-columns: 1.3fr 1fr 0.9fr 1.2fr;
+      grid-template-columns: 1.2fr 0.9fr 1.3fr;
       gap: 14px;
       align-items: end;
     }
 
-    @media (max-width: 960px) {
-      .filter-controls {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 560px) {
+    @media (max-width: 680px) {
       .filter-controls {
         grid-template-columns: 1fr;
       }
@@ -205,7 +317,7 @@
     }
 
     th, td {
-      padding: 16px 20px;
+      padding: 15px 16px;
       text-align: left;
       border-bottom: 1px solid var(--k-border);
       vertical-align: middle;
@@ -215,9 +327,10 @@
       background-color: #FAFAFA;
       font-weight: 700;
       color: var(--k-black);
-      font-size: 14px;
+      font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      white-space: nowrap;
     }
 
     td {
@@ -248,8 +361,7 @@
     .loc-title {
       font-weight: 700;
       color: var(--k-black);
-      display: inline-block;
-      margin-right: 8px;
+      display: block;
     }
 
     .loc-addr {
@@ -264,9 +376,9 @@
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
-      padding: 2px 7px;
-      letter-spacing: 0.4px;
-      vertical-align: middle;
+      padding: 4px 9px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
     }
 
     .badge-roba {
@@ -297,13 +409,13 @@
       font-weight: 600;
       font-size: 13px;
       text-transform: uppercase;
-      padding: 13px 20px;
+      padding: 12px 18px;
       display: inline-block;
       border: 1px solid #e3e3e3;
       transition: all 0.2s ease;
       text-align: center;
       line-height: 1.2;
-      min-width: 140px;
+      min-width: 135px;
       white-space: nowrap;
     }
 
@@ -321,7 +433,7 @@
       font-size: 13px;
     }
     .footer-container {
-      max-width: 1200px;
+      max-width: 1320px;
       margin: 0 auto;
     }
     .footer-container p {
@@ -329,7 +441,7 @@
       margin-top: 8px;
     }
 
-    /* RESPONSIVE DESIGN */
+    /* RESPONSIVE TABLE */
     @media (max-width: 768px) {
       table, thead, tbody, th, td, tr {
         display: block;
@@ -346,29 +458,31 @@
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
-        padding-left: 50%;
-        min-height: 60px;
+        padding-left: 44%;
+        min-height: 52px;
       }
       td:before {
         position: absolute;
-        top: 16px;
-        left: 20px;
-        width: 45%;
+        top: 15px;
+        left: 16px;
+        width: 40%;
         padding-right: 10px;
         white-space: nowrap;
         font-weight: 700;
-        font-size: 13px;
+        font-size: 12px;
+        text-transform: uppercase;
         color: var(--k-muted);
       }
       td:nth-of-type(1):before { content: "Datum"; }
       td:nth-of-type(2):before { content: "Lokacija / Objekt"; }
-      td:nth-of-type(3):before { content: "Datoteka"; }
-      td:nth-of-type(4):before { content: "Preuzimanje"; }
-      td:nth-of-type(4) { text-align: left !important; }
+      td:nth-of-type(3):before { content: "Vrsta"; }
+      td:nth-of-type(4):before { content: "Datoteka"; }
+      td:nth-of-type(5):before { content: "Preuzimanje"; }
+      td:nth-of-type(5) { text-align: left !important; }
 
       .btn {
         width: 100%;
-        margin-top: 10px;
+        margin-top: 6px;
       }
     }
   </style>
@@ -386,65 +500,68 @@
   <main>
     <h1>Objava cjenika proizvoda i usluga</h1>
 
-    <div class="filter-box" id="filter-panel" style="display: none;">
-      <div class="channel-tabs" role="group" aria-label="Odabir prodajnog kanala">
-        <button type="button" class="tab-btn active" data-channel="ALL">Svi kanali</button>
-        <button type="button" class="tab-btn" data-channel="KC">Kärcher Centri</button>
-        <button type="button" class="tab-btn" data-channel="SERVIS">Servisi</button>
-        <button type="button" class="tab-btn" data-channel="WEBSHOP">Webshop</button>
-      </div>
+    <div id="loading">Učitavanje cjenika...</div>
 
-      <div class="filter-controls">
-        <div class="filter-group">
-          <label for="filter-location">Lokacija</label>
-          <select id="filter-location">
-            <option value="ALL">Sve lokacije</option>
-          </select>
+    <div class="layout-grid" id="main-layout" style="display: none;">
+      <aside class="date-sidebar" aria-label="Odabir datuma objave">
+        <div class="sidebar-title">Datum objave</div>
+        <div class="date-list" id="date-buttons"></div>
+      </aside>
+
+      <div class="content-col">
+        <div class="filter-box">
+          <div class="channel-tabs" role="group" aria-label="Odabir prodajnog kanala">
+            <button type="button" class="tab-btn active" data-channel="ALL">Svi kanali</button>
+            <button type="button" class="tab-btn" data-channel="KC">Kärcher Centri</button>
+            <button type="button" class="tab-btn" data-channel="SERVIS">Servisi</button>
+            <button type="button" class="tab-btn" data-channel="WEBSHOP">Webshop</button>
+          </div>
+
+          <div class="filter-controls">
+            <div class="filter-group">
+              <label for="filter-location">Lokacija</label>
+              <select id="filter-location">
+                <option value="ALL">Sve lokacije</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="filter-type">Vrsta cjenika</label>
+              <select id="filter-type">
+                <option value="ALL">Roba i usluge</option>
+                <option value="ROBA">Samo roba (proizvodi)</option>
+                <option value="USLUGA">Samo usluge (servis)</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="filter-search">Brza pretraga</label>
+              <input type="search" id="filter-search" placeholder="Lokacija, adresa ili naziv datoteke...">
+            </div>
+          </div>
+
+          <div class="filter-status-row">
+            <span id="filter-count">Učitavanje...</span>
+            <button type="button" class="reset-link" id="btn-reset">Poništi filtre</button>
+          </div>
         </div>
 
-        <div class="filter-group">
-          <label for="filter-date">Datum objave</label>
-          <select id="filter-date">
-            <option value="ALL">Svi datumi (zadnjih 15 dana)</option>
-            <option value="LATEST">Samo najnovija objava</option>
-          </select>
-        </div>
+        <div id="empty-state" style="display: none;">Nema objavljenih cjenika za odabrane filtre.</div>
 
-        <div class="filter-group">
-          <label for="filter-type">Vrsta cjenika</label>
-          <select id="filter-type">
-            <option value="ALL">Roba i usluge</option>
-            <option value="ROBA">Samo roba (proizvodi)</option>
-            <option value="USLUGA">Samo usluge (servis)</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label for="filter-search">Brza pretraga</label>
-          <input type="search" id="filter-search" placeholder="Lokacija, adresa ili naziv datoteke...">
-        </div>
-      </div>
-
-      <div class="filter-status-row">
-        <span id="filter-count">Učitavanje...</span>
-        <button type="button" class="reset-link" id="btn-reset">Poništi filtre</button>
+        <table id="cjenici-table" style="display: none;">
+          <thead>
+            <tr>
+              <th>Datum</th>
+              <th>Lokacija / Objekt</th>
+              <th>Vrsta</th>
+              <th>Datoteka</th>
+              <th style="text-align: center;">Preuzimanje</th>
+            </tr>
+          </thead>
+          <tbody id="cjenici-list"></tbody>
+        </table>
       </div>
     </div>
-
-    <div id="loading">Učitavanje cjenika...</div>
-    <div id="empty-state" style="display: none;">Nema objavljenih cjenika za odabrane filtre.</div>
-
-    <table id="cjenici-table" style="display: none;">
-      <thead>
-        <tr>
-          <th>Datum</th>
-          <th>Lokacija / Objekt</th>
-          <th>Datoteka</th>
-          <th style="text-align: center;">Preuzimanje</th>
-        </tr>
-      </thead>
-      <tbody id="cjenici-list"></tbody>
-    </table>
   </main>
 
   <footer>
@@ -469,6 +586,8 @@
 
       let allRows = [];
       let activeChannel = "ALL";
+      let selectedDate = "ALL";
+      let latestDateIso = "";
 
       function escapeHtml(str) {
         return String(str)
@@ -478,7 +597,11 @@
           .replace(/"/g, "&quot;");
       }
 
-      function parseCsvItem(fileName) {
+      function parseCsvItem(fileObj) {
+        const filePath = typeof fileObj === "string" ? fileObj : (fileObj.path || fileObj.fileName);
+        if (!filePath) return null;
+
+        const fileName = filePath.split("/").pop();
         const match = fileName.match(/^(\d{11})_(.+)_(ROBA|USLUGA)_(\d{3})_(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})\.csv$/i);
         if (!match) return null;
 
@@ -510,10 +633,11 @@
         const isWebshop = oznaka === "Webshop" || middlePart.startsWith("Internet_trgovina_");
         const isStandaloneServis = oznaka.startsWith("Servis_") || middlePart.startsWith("Servis_");
         const isKc = oznaka.startsWith("KC_");
+        const encodedPath = filePath.split("/").map(encodeURIComponent).join("/");
 
         return {
           fileName,
-          downloadUrl: "./" + encodeURIComponent(fileName),
+          downloadUrl: "./" + encodedPath,
           datum,
           vrijeme,
           dateIso,
@@ -529,35 +653,33 @@
         };
       }
 
-      async function loadFileNames() {
-        // 1. Primarno: manifest cjenici.json (bez API rate-limita)
+      async function loadFileEntries() {
         try {
           const manifestRes = await fetch(`./cjenici.json?t=${Date.now()}`, { cache: "no-store" });
           if (manifestRes.ok) {
             const manifest = await manifestRes.json();
             if (manifest && Array.isArray(manifest.files)) {
-              return manifest.files.map(f => f.fileName || f.path.split("/").pop());
+              return manifest.files;
             }
           }
         } catch (e) {}
 
-        // 2. Fallback: GitHub Contents API
         const pathRepo = window.location.pathname.split("/")[1] || "AK-HR-Cjenici";
         const hostOwner = window.location.hostname.endsWith("github.io")
           ? window.location.hostname.split(".")[0]
           : "Karcher-AK-HR";
-        const apiUrl = `https://api.github.com/repos/${hostOwner}/${pathRepo}/contents/`;
+        const apiUrl = `https://api.github.com/repos/${hostOwner}/${pathRepo}/git/trees/main?recursive=1`;
         const ghRes = await fetch(apiUrl);
         if (!ghRes.ok) throw new Error("GitHub API greška");
-        const files = await ghRes.json();
-        return files.map(f => f.name);
+        const data = await ghRes.json();
+        return (data.tree || [])
+          .filter(item => item.type === "blob" && item.path.toLowerCase().endsWith(".csv"))
+          .map(item => ({ path: item.path }));
       }
 
-      function populateDropdowns(rows) {
+      function populateControls(rows) {
+        // 1. Lokacije dropdown
         const locSelect = document.getElementById("filter-location");
-        const dateSelect = document.getElementById("filter-date");
-
-        // Jedinstvene lokacije
         const locMap = new Map();
         rows.forEach(r => {
           if (!locMap.has(r.oznaka)) {
@@ -573,21 +695,52 @@
             locSelect.appendChild(opt);
           });
 
-        // Jedinstveni datumi
+        // 2. Lijevi izbornik datuma
+        const dateContainer = document.getElementById("date-buttons");
         const dateMap = new Map();
         rows.forEach(r => {
-          if (!dateMap.has(r.dateIso)) dateMap.set(r.dateIso, r.datum);
+          if (!dateMap.has(r.dateIso)) {
+            dateMap.set(r.dateIso, { display: r.datum, count: 0 });
+          }
+          dateMap.get(r.dateIso).count++;
         });
+
         const sortedDates = Array.from(dateMap.entries()).sort((a, b) => b[0].localeCompare(a[0]));
-        if (sortedDates.length > 0) {
-          dateSelect.options[1].textContent = `Samo najnovija objava (${sortedDates[0][1]})`;
-        }
-        sortedDates.forEach(([iso, display]) => {
-          const opt = document.createElement("option");
-          opt.value = iso;
-          opt.textContent = display;
-          dateSelect.appendChild(opt);
+        latestDateIso = sortedDates.length > 0 ? sortedDates[0][0] : "ALL";
+        selectedDate = latestDateIso;
+
+        sortedDates.forEach(([iso, info], idx) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "date-btn" + (iso === selectedDate ? " active" : "");
+          btn.dataset.date = iso;
+
+          const rightPart = idx === 0
+            ? `<span class="date-btn-badge">Aktualno</span>`
+            : `<span class="date-btn-count">${info.count}</span>`;
+
+          btn.innerHTML = `<span>${info.display}</span>${rightPart}`;
+          btn.addEventListener("click", () => selectDate(iso));
+          dateContainer.appendChild(btn);
         });
+
+        if (sortedDates.length > 1) {
+          const allBtn = document.createElement("button");
+          allBtn.type = "button";
+          allBtn.className = "date-btn date-btn-all";
+          allBtn.dataset.date = "ALL";
+          allBtn.innerHTML = `<span>Svi datumi (15 dana)</span><span class="date-btn-count">${rows.length}</span>`;
+          allBtn.addEventListener("click", () => selectDate("ALL"));
+          dateContainer.appendChild(allBtn);
+        }
+      }
+
+      function selectDate(dateIso) {
+        selectedDate = dateIso;
+        document.querySelectorAll(".date-btn").forEach(b => {
+          b.classList.toggle("active", b.dataset.date === dateIso);
+        });
+        renderTable();
       }
 
       function renderTable() {
@@ -597,20 +750,16 @@
         const countEl = document.getElementById("filter-count");
 
         const locVal = document.getElementById("filter-location").value;
-        const dateVal = document.getElementById("filter-date").value;
         const typeVal = document.getElementById("filter-type").value;
         const searchVal = document.getElementById("filter-search").value.trim().toLowerCase();
 
-        const latestDateIso = allRows.length > 0 ? allRows[0].dateIso : "";
-
         const filtered = allRows.filter(r => {
+          if (selectedDate !== "ALL" && r.dateIso !== selectedDate) return false;
           if (activeChannel === "KC" && !r.isKc) return false;
           if (activeChannel === "SERVIS" && !r.isServis) return false;
           if (activeChannel === "WEBSHOP" && !r.isWebshop) return false;
 
           if (locVal !== "ALL" && r.oznaka !== locVal) return false;
-          if (dateVal === "LATEST" && r.dateIso !== latestDateIso) return false;
-          if (dateVal !== "ALL" && dateVal !== "LATEST" && r.dateIso !== dateVal) return false;
           if (typeVal !== "ALL" && r.vrsta !== typeVal) return false;
 
           if (searchVal) {
@@ -620,7 +769,10 @@
           return true;
         });
 
-        countEl.textContent = `Prikazano ${filtered.length} od ${allRows.length} cjenika`;
+        const dateLabel = selectedDate === "ALL"
+          ? "svi datumi"
+          : (filtered[0] ? filtered[0].datum : selectedDate);
+        countEl.textContent = `Prikazano ${filtered.length} cjenika (${dateLabel})`;
         list.innerHTML = "";
 
         if (filtered.length === 0) {
@@ -644,8 +796,10 @@
             </td>
             <td>
               <span class="loc-title">${escapeHtml(item.locTitle)}</span>
-              <span class="badge ${badgeClass}">${badgeLabel}</span>
               <span class="loc-addr">${escapeHtml(item.locAddr)}</span>
+            </td>
+            <td>
+              <span class="badge ${badgeClass}">${badgeLabel}</span>
             </td>
             <td><span class="file-name">${escapeHtml(item.fileName)}</span></td>
             <td style="text-align: center;">
@@ -656,7 +810,7 @@
         });
       }
 
-      // Event listeneri za filtre
+      // Event listeneri
       document.querySelectorAll(".tab-btn").forEach(btn => {
         btn.addEventListener("click", function () {
           document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
@@ -667,7 +821,6 @@
       });
 
       document.getElementById("filter-location").addEventListener("change", renderTable);
-      document.getElementById("filter-date").addEventListener("change", renderTable);
       document.getElementById("filter-type").addEventListener("change", renderTable);
       document.getElementById("filter-search").addEventListener("input", renderTable);
 
@@ -675,18 +828,16 @@
         activeChannel = "ALL";
         document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.channel === "ALL"));
         document.getElementById("filter-location").value = "ALL";
-        document.getElementById("filter-date").value = "ALL";
         document.getElementById("filter-type").value = "ALL";
         document.getElementById("filter-search").value = "";
-        renderTable();
+        selectDate(latestDateIso);
       });
 
       // Inicijalno učitavanje
-      loadFileNames()
-        .then(names => {
+      loadFileEntries()
+        .then(entries => {
           const loading = document.getElementById("loading");
-          allRows = names
-            .filter(n => n.toLowerCase().endsWith(".csv"))
+          allRows = entries
             .map(parseCsvItem)
             .filter(Boolean)
             .sort((a, b) => b.sortStamp.localeCompare(a.sortStamp) || a.locOrder - b.locOrder || a.vrsta.localeCompare(b.vrsta));
@@ -694,13 +845,13 @@
           loading.style.display = "none";
 
           if (allRows.length === 0) {
-            document.getElementById("empty-state").innerText = "Trenutačno nema dostupnih cjenika.";
-            document.getElementById("empty-state").style.display = "block";
+            loading.style.display = "block";
+            loading.innerText = "Trenutačno nema dostupnih cjenika.";
             return;
           }
 
-          document.getElementById("filter-panel").style.display = "block";
-          populateDropdowns(allRows);
+          document.getElementById("main-layout").style.display = "grid";
+          populateControls(allRows);
           renderTable();
         })
         .catch(() => {
