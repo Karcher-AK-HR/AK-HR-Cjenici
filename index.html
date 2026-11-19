@@ -33,11 +33,11 @@
     header {
       background: #FFFFFF;
       border-bottom: 5px solid var(--k-yellow);
-      padding: 16px 20px;
+      padding: 16px 24px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
     .header-container {
-      max-width: 1320px;
+      max-width: 1680px;
       width: 100%;
       margin: 0 auto;
     }
@@ -54,10 +54,10 @@
 
     /* MAIN CONTENT CONTAINER */
     main {
-      max-width: 1320px;
+      max-width: 1680px;
       width: 100%;
       margin: 36px auto;
-      padding: 0 20px 60px 20px;
+      padding: 0 24px 60px 24px;
       flex: 1;
     }
 
@@ -68,131 +68,13 @@
       margin-bottom: 22px;
     }
 
-    /* TWO-COLUMN LAYOUT (LEFT DATE SIDEBAR + RIGHT CONTENT) */
-    .layout-grid {
-      display: grid;
-      grid-template-columns: 240px 1fr;
-      gap: 24px;
-      align-items: start;
-    }
-
-    @media (max-width: 960px) {
-      .layout-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* LEFT DATE SIDEBAR */
-    .date-sidebar {
-      background: #FFFFFF;
-      border: 1px solid var(--k-border);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      padding: 16px;
-    }
-
-    .sidebar-title {
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--k-muted);
-      padding-bottom: 10px;
-      margin-bottom: 12px;
-      border-bottom: 1px solid #eeeeee;
-    }
-
-    .date-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    @media (max-width: 960px) {
-      .date-list {
-        flex-direction: row;
-        flex-wrap: wrap;
-      }
-    }
-
-    .date-btn {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      background: #FAFAFA;
-      color: var(--k-black);
-      border: 1px solid var(--k-border);
-      padding: 10px 12px;
-      font-size: 14px;
-      font-weight: 600;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    @media (max-width: 960px) {
-      .date-btn {
-        width: auto;
-      }
-    }
-
-    .date-btn:hover {
-      background: #f0f0f0;
-      border-color: #bcbcbc;
-    }
-
-    .date-btn.active {
-      background: var(--k-black);
-      color: #FFFFFF;
-      border-color: var(--k-black);
-      border-left: 4px solid var(--k-yellow);
-    }
-
-    .date-btn-badge {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 2px 6px;
-      background: var(--k-yellow);
-      color: var(--k-black);
-      letter-spacing: 0.3px;
-    }
-
-    .date-btn-count {
-      font-size: 12px;
-      color: var(--k-muted);
-      font-weight: 500;
-    }
-
-    .date-btn.active .date-btn-count {
-      color: #cccccc;
-    }
-
-    .date-btn-all {
-      margin-top: 6px;
-      background: #FFFFFF;
-      font-size: 13px;
-      color: var(--k-muted);
-    }
-
-    @media (max-width: 960px) {
-      .date-btn-all {
-        margin-top: 0;
-      }
-    }
-
-    /* RIGHT CONTENT & TOP FILTER BAR */
-    .content-col {
-      min-width: 0;
-    }
-
+    /* TOP FILTER BAR (FULL WIDTH ABOVE DATE SIDEBAR & TABLE) */
     .filter-box {
       background: #FFFFFF;
       border: 1px solid var(--k-border);
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       padding: 18px 20px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .channel-tabs {
@@ -208,7 +90,7 @@
       background: #F4F4F4;
       color: var(--k-black);
       border: 1px solid var(--k-border);
-      padding: 8px 15px;
+      padding: 8px 16px;
       font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
@@ -229,12 +111,12 @@
 
     .filter-controls {
       display: grid;
-      grid-template-columns: 1.2fr 0.9fr 1.3fr;
-      gap: 14px;
+      grid-template-columns: 1.2fr 1fr 1.5fr;
+      gap: 16px;
       align-items: end;
     }
 
-    @media (max-width: 680px) {
+    @media (max-width: 768px) {
       .filter-controls {
         grid-template-columns: 1fr;
       }
@@ -297,6 +179,132 @@
       background: #F4F4F4;
     }
 
+    /* TWO-COLUMN DATA AREA: LEFT DATE SIDEBAR + RIGHT TABLE (ALIGNED AT TOP) */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* LEFT DATE SIDEBAR */
+    .date-sidebar {
+      background: #FFFFFF;
+      border: 1px solid var(--k-border);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 15px;
+    }
+
+    .sidebar-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--k-black);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--k-border);
+    }
+
+    .date-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    @media (max-width: 1024px) {
+      .date-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+
+    .date-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: #FAFAFA;
+      color: var(--k-black);
+      border: 1px solid var(--k-border);
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    @media (max-width: 1024px) {
+      .date-btn {
+        width: auto;
+      }
+    }
+
+    .date-btn:hover {
+      background: #f0f0f0;
+      border-color: #bcbcbc;
+    }
+
+    .date-btn.active {
+      background: var(--k-black);
+      color: #FFFFFF;
+      border-color: var(--k-black);
+      border-left: 4px solid var(--k-yellow);
+    }
+
+    .date-btn-badge {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      background: var(--k-yellow);
+      color: var(--k-black);
+      letter-spacing: 0.3px;
+    }
+
+    .date-btn-count {
+      font-size: 12px;
+      color: var(--k-muted);
+      font-weight: 500;
+    }
+
+    .date-btn.active .date-btn-count {
+      color: #cccccc;
+    }
+
+    .date-btn-all {
+      margin-top: 6px;
+      background: #FFFFFF;
+      font-size: 13px;
+      color: var(--k-muted);
+    }
+
+    @media (max-width: 1024px) {
+      .date-btn-all {
+        margin-top: 0;
+      }
+    }
+
+    .table-col {
+      min-width: 0;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      background: #FFFFFF;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      border: 1px solid var(--k-border);
+    }
+
     #loading,
     #empty-state {
       font-weight: 600;
@@ -312,12 +320,10 @@
       width: 100%;
       border-collapse: collapse;
       background: #FFFFFF;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      border: 1px solid var(--k-border);
     }
 
     th, td {
-      padding: 15px 16px;
+      padding: 14px 14px;
       text-align: left;
       border-bottom: 1px solid var(--k-border);
       vertical-align: middle;
@@ -356,12 +362,14 @@
       font-size: 12px;
       color: var(--k-muted);
       display: block;
+      white-space: nowrap;
     }
 
     .loc-title {
       font-weight: 700;
       color: var(--k-black);
       display: block;
+      white-space: nowrap;
     }
 
     .loc-addr {
@@ -369,6 +377,7 @@
       color: var(--k-muted);
       display: block;
       margin-top: 2px;
+      white-space: nowrap;
     }
 
     .badge {
@@ -395,9 +404,9 @@
 
     .file-name {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 12px;
+      font-size: 12.5px;
       color: var(--k-muted);
-      word-break: break-all;
+      white-space: nowrap;
     }
 
     /* KÄRCHER BUTTONS */
@@ -429,11 +438,11 @@
     footer {
       background: #1A1A1A;
       color: #FFFFFF;
-      padding: 36px 20px;
+      padding: 36px 24px;
       font-size: 13px;
     }
     .footer-container {
-      max-width: 1320px;
+      max-width: 1680px;
       margin: 0 auto;
     }
     .footer-container p {
@@ -441,8 +450,11 @@
       margin-top: 8px;
     }
 
-    /* RESPONSIVE TABLE */
+    /* RESPONSIVE MOBILE TABLE */
     @media (max-width: 768px) {
+      .table-wrap {
+        overflow-x: visible;
+      }
       table, thead, tbody, th, td, tr {
         display: block;
       }
@@ -458,14 +470,14 @@
         border: none;
         border-bottom: 1px solid #eee;
         position: relative;
-        padding-left: 44%;
+        padding-left: 42%;
         min-height: 52px;
       }
       td:before {
         position: absolute;
-        top: 15px;
-        left: 16px;
-        width: 40%;
+        top: 14px;
+        left: 14px;
+        width: 38%;
         padding-right: 10px;
         white-space: nowrap;
         font-weight: 700;
@@ -479,6 +491,13 @@
       td:nth-of-type(4):before { content: "Datoteka"; }
       td:nth-of-type(5):before { content: "Preuzimanje"; }
       td:nth-of-type(5) { text-align: left !important; }
+
+      .loc-title,
+      .loc-addr,
+      .file-name {
+        white-space: normal;
+        word-break: break-word;
+      }
 
       .btn {
         width: 100%;
@@ -502,64 +521,68 @@
 
     <div id="loading">Učitavanje cjenika...</div>
 
-    <div class="layout-grid" id="main-layout" style="display: none;">
-      <aside class="date-sidebar" aria-label="Odabir datuma objave">
-        <div class="sidebar-title">Datum objave</div>
-        <div class="date-list" id="date-buttons"></div>
-      </aside>
+    <div id="app-shell" style="display: none;">
+      <div class="filter-box">
+        <div class="channel-tabs" role="group" aria-label="Odabir prodajnog kanala">
+          <button type="button" class="tab-btn active" data-channel="ALL">Svi kanali</button>
+          <button type="button" class="tab-btn" data-channel="KC">Kärcher Centri</button>
+          <button type="button" class="tab-btn" data-channel="SERVIS">Servisi</button>
+          <button type="button" class="tab-btn" data-channel="WEBSHOP">Webshop</button>
+        </div>
 
-      <div class="content-col">
-        <div class="filter-box">
-          <div class="channel-tabs" role="group" aria-label="Odabir prodajnog kanala">
-            <button type="button" class="tab-btn active" data-channel="ALL">Svi kanali</button>
-            <button type="button" class="tab-btn" data-channel="KC">Kärcher Centri</button>
-            <button type="button" class="tab-btn" data-channel="SERVIS">Servisi</button>
-            <button type="button" class="tab-btn" data-channel="WEBSHOP">Webshop</button>
+        <div class="filter-controls">
+          <div class="filter-group">
+            <label for="filter-location">Lokacija</label>
+            <select id="filter-location">
+              <option value="ALL">Sve lokacije</option>
+            </select>
           </div>
 
-          <div class="filter-controls">
-            <div class="filter-group">
-              <label for="filter-location">Lokacija</label>
-              <select id="filter-location">
-                <option value="ALL">Sve lokacije</option>
-              </select>
-            </div>
-
-            <div class="filter-group">
-              <label for="filter-type">Vrsta cjenika</label>
-              <select id="filter-type">
-                <option value="ALL">Roba i usluge</option>
-                <option value="ROBA">Samo roba (proizvodi)</option>
-                <option value="USLUGA">Samo usluge (servis)</option>
-              </select>
-            </div>
-
-            <div class="filter-group">
-              <label for="filter-search">Brza pretraga</label>
-              <input type="search" id="filter-search" placeholder="Lokacija, adresa ili naziv datoteke...">
-            </div>
+          <div class="filter-group">
+            <label for="filter-type">Vrsta cjenika</label>
+            <select id="filter-type">
+              <option value="ALL">Roba i usluge</option>
+              <option value="ROBA">Samo roba (proizvodi)</option>
+              <option value="USLUGA">Samo usluge (servis)</option>
+            </select>
           </div>
 
-          <div class="filter-status-row">
-            <span id="filter-count">Učitavanje...</span>
-            <button type="button" class="reset-link" id="btn-reset">Poništi filtre</button>
+          <div class="filter-group">
+            <label for="filter-search">Brza pretraga</label>
+            <input type="search" id="filter-search" placeholder="Lokacija, adresa ili naziv datoteke...">
           </div>
         </div>
 
-        <div id="empty-state" style="display: none;">Nema objavljenih cjenika za odabrane filtre.</div>
+        <div class="filter-status-row">
+          <span id="filter-count">Učitavanje...</span>
+          <button type="button" class="reset-link" id="btn-reset">Poništi filtre</button>
+        </div>
+      </div>
 
-        <table id="cjenici-table" style="display: none;">
-          <thead>
-            <tr>
-              <th>Datum</th>
-              <th>Lokacija / Objekt</th>
-              <th>Vrsta</th>
-              <th>Datoteka</th>
-              <th style="text-align: center;">Preuzimanje</th>
-            </tr>
-          </thead>
-          <tbody id="cjenici-list"></tbody>
-        </table>
+      <div class="content-grid">
+        <aside class="date-sidebar" aria-label="Odabir datuma objave">
+          <div class="sidebar-title">Datum objave</div>
+          <div class="date-list" id="date-buttons"></div>
+        </aside>
+
+        <div class="table-col">
+          <div id="empty-state" style="display: none;">Nema objavljenih cjenika za odabrane filtre.</div>
+
+          <div class="table-wrap" id="table-wrap">
+            <table id="cjenici-table">
+              <thead>
+                <tr>
+                  <th>Datum</th>
+                  <th>Lokacija / Objekt</th>
+                  <th>Vrsta</th>
+                  <th>Datoteka</th>
+                  <th style="text-align: center;">Preuzimanje</th>
+                </tr>
+              </thead>
+              <tbody id="cjenici-list"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -678,7 +701,6 @@
       }
 
       function populateControls(rows) {
-        // 1. Lokacije dropdown
         const locSelect = document.getElementById("filter-location");
         const locMap = new Map();
         rows.forEach(r => {
@@ -695,7 +717,6 @@
             locSelect.appendChild(opt);
           });
 
-        // 2. Lijevi izbornik datuma
         const dateContainer = document.getElementById("date-buttons");
         const dateMap = new Map();
         rows.forEach(r => {
@@ -745,7 +766,7 @@
 
       function renderTable() {
         const list = document.getElementById("cjenici-list");
-        const table = document.getElementById("cjenici-table");
+        const tableWrap = document.getElementById("table-wrap");
         const emptyState = document.getElementById("empty-state");
         const countEl = document.getElementById("filter-count");
 
@@ -776,13 +797,13 @@
         list.innerHTML = "";
 
         if (filtered.length === 0) {
-          table.style.display = "none";
+          tableWrap.style.display = "none";
           emptyState.style.display = "block";
           return;
         }
 
         emptyState.style.display = "none";
-        table.style.display = "table";
+        tableWrap.style.display = "block";
 
         filtered.forEach(item => {
           const badgeClass = item.vrsta === "ROBA" ? "badge-roba" : "badge-usluga";
@@ -810,7 +831,6 @@
         });
       }
 
-      // Event listeneri
       document.querySelectorAll(".tab-btn").forEach(btn => {
         btn.addEventListener("click", function () {
           document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
@@ -833,7 +853,6 @@
         selectDate(latestDateIso);
       });
 
-      // Inicijalno učitavanje
       loadFileEntries()
         .then(entries => {
           const loading = document.getElementById("loading");
@@ -850,7 +869,7 @@
             return;
           }
 
-          document.getElementById("main-layout").style.display = "grid";
+          document.getElementById("app-shell").style.display = "block";
           populateControls(allRows);
           renderTable();
         })
